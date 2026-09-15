@@ -602,15 +602,23 @@
           <p>Grazie, abbiamo ricevuto i tuoi dati. Ti ricontattiamo entro 24 ore lavorative.</p>
         </div>
         <script>
+          var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCS4aONXh_lCNKnC7x1BKG-3To-9S8lll01lJefJbsMcMo_AZE9IDE1_oy2D6K-GOTog/exec';
           document.getElementById('contact-form').addEventListener('submit', function(e){
             e.preventDefault();
             var form = e.target;
             var btn = document.getElementById('form-submit-btn');
             btn.disabled = true;
             btn.textContent = 'Invio in corso...';
-            // NOTA: collegare qui l'endpoint di invio (es. Google Apps Script, come nel sito Linea Pensione)
-            form.style.display = 'none';
-            document.getElementById('form-success').style.display = 'block';
+            var data = new FormData(form);
+            fetch(SCRIPT_URL, { method: 'POST', body: data, mode: 'no-cors' })
+              .then(function(){
+                form.style.display = 'none';
+                document.getElementById('form-success').style.display = 'block';
+              })
+              .catch(function(){
+                form.style.display = 'none';
+                document.getElementById('form-success').style.display = 'block';
+              });
           });
         </script>
       </div>
