@@ -588,7 +588,7 @@
           <li><span class="mark">→</span><span>Un referente dedicato al tuo caso</span></li>
         </ul>
       </div>
-      <div>
+      <div id="modulo-form">
         <form id="contact-form">
           <div class="field"><label for="nome">Nome e cognome</label><input type="text" id="nome" name="nome" required autocomplete="name"></div>
           <div class="field"><label for="telefono">Telefono</label><input type="tel" id="telefono" name="telefono" required autocomplete="tel"></div>
@@ -641,5 +641,19 @@
   </div>
 </footer>
 
+  <script>
+    (function(){
+      if (window.innerWidth > 640) return; // solo smartphone
+      var links = document.querySelectorAll('a[href="#modulo"]');
+      var target = document.getElementById('modulo-form');
+      if (!target) return;
+      links.forEach(function(link){
+        link.addEventListener('click', function(e){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
